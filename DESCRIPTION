@@ -1,9 +1,12 @@
 Package: jacksonphd
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1
+Title: Data from Simon A Jackson's PhD (2016)
+Version: 0.0.0.9000
 Date: 2016-02-19
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: person("Simon A", "Jackson", email = "simon.jackson@sydney.edu.au", role = c("aut", "cre"))
+Description: Contains item-level data and some computed variables for
+  all four samples collected by Simon A Jackson for his PhD.
+  All samples consist of undergraduate psychology students from the
+  University of Sydney. Samples 1, 2 and 4 and first-year students.
+  Sample 3 consists of third-year students.
 LazyData: TRUE
