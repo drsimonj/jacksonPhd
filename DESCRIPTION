@@ -10,3 +10,5 @@ Description: Contains item-level data and some computed variables for
   University of Sydney. Samples 1, 2 and 4 and first-year students.
   Sample 3 consists of third-year students.
 LazyData: TRUE
+URL: https://github.com/drsimonj/jacksonphd
+BugReports: https://github.com/drsimonj/jacksonphd/issues
