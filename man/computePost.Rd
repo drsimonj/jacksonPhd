@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_variables.R
 \name{computePost}
 \alias{computePost}
-\title{Compute the POST (Point Of Sufficient cerTainty) for each participant in Jackson Phd test data frame.}
+\title{Compute the POST (Point Of Sufficient cerTainty) for each participant.}
 \usage{
 computePost(x)
 }
@@ -16,7 +16,7 @@ the calculations? Default = True}
 POST vector. Any values < 0 or > 100 scored as NA.
 }
 \description{
-Compute the POST (Point Of Sufficient cerTainty) for each participant in Jackson Phd test data frame.
+To be called with compute().
 }
 \examples{
 computePost(phd[[1]]$EA)

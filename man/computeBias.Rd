@@ -16,6 +16,7 @@ Bias vector.
 }
 \description{
 Compute the bias score for each participant in the data frame.
+To be called with compute().
 }
 \examples{
 computeBias(phd[[1]]$EA)

@@ -3,7 +3,8 @@
 \name{computeDiscrimination}
 \alias{computeDiscrimination}
 \title{Compute discrimination (confidence for correct answers - confidence for
-incorrect answers) for each participant in Jackson Phd test data frame.}
+incorrect answers) for each participant in Jackson Phd test data frame.
+To be called with compute().}
 \usage{
 computeDiscrimination(x, na.rm = TRUE)
 }
@@ -18,6 +19,7 @@ Discrimination vector.
 \description{
 Compute discrimination (confidence for correct answers - confidence for
 incorrect answers) for each participant in Jackson Phd test data frame.
+To be called with compute().
 }
 \examples{
 computeDiscrimination(phd[[1]]$EA)

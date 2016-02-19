@@ -17,6 +17,7 @@ Confidence vector.
 \description{
 Compute the mean of all 'c' columns (scored 1 for correct and 0 for
 incorrect) for each participant (row).
+To be called with compute().
 }
 \examples{
 computeConfidence(phd[[1]]$EA)

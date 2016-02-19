@@ -17,6 +17,7 @@ Accuracy vector.
 \description{
 Compute the mean of all 'a' columns (scored 1 for correct and 0 for
 incorrect) for each participant (row) and multiply by 100.
+To be called with compute().
 }
 \examples{
 computeAccuracy(phd[[1]]$EA)
