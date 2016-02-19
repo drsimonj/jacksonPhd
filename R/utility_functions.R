@@ -3,6 +3,7 @@
 #' Get item-level column names for answer accuracy (a), confidence (c), decision (d)
 #' or time (t) from data frame.
 #'
+#' @export
 #' @param x Data frame from phd sample.
 #' @param i Character indicating information type to get. 'a' = accuracy, 'c' =
 #'   confidence, 'd' = decision, 't' = time.
@@ -17,6 +18,7 @@ getCol <- function(x, i) {
 #'
 #' Queries and returns the number of accuracy columns.
 #'
+#' @export
 #' @param x Data frame from phd sample.
 #' @return Vector of column names.
 #' @examples

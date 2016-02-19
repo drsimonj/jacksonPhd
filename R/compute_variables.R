@@ -3,6 +3,7 @@
 #' Compute the mean of all 'a' columns (scored 1 for correct and 0 for
 #' incorrect) for each participant (row) and multiply by 100.
 #'
+#' @export
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
 #' @return Accuracy vector.
@@ -17,6 +18,7 @@ computeAccuracy <- function(x, na.rm = TRUE) {
 #' Compute the mean of all 'c' columns (scored 1 for correct and 0 for
 #' incorrect) for each participant (row).
 #'
+#' @export
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
 #' @return Confidence vector.
@@ -28,6 +30,7 @@ computeConfidence <- function(x, na.rm = TRUE) {
 
 #' Compute the POST (Point Of Sufficient cerTainty) for each participant in Jackson Phd test data frame.
 #'
+#' @export
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
 #' @return POST vector. Any values < 0 or > 100 scored as NA.
@@ -50,6 +53,7 @@ computePost <- function(x) {
 #' Compute discrimination (confidence for correct answers - confidence for
 #' incorrect answers) for each participant in Jackson Phd test data frame.
 #'
+#' @export
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
 #' @return Discrimination vector.
