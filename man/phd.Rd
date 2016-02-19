@@ -12,7 +12,8 @@ phd
 }
 \description{
 A list of datasets containing results on various test for four samples
-collected for research by Simon A Jackson.
+collected for research by Simon A Jackson. Data list available as 'phd'.
+Additional helper functions provided.
 }
 \keyword{datasets}
 

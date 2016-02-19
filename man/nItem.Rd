@@ -7,12 +7,15 @@
 nItem(x)
 }
 \arguments{
-\item{x}{Data frame to get number of items from.}
+\item{x}{Data frame from phd sample.}
 }
 \value{
 Vector of column names.
 }
 \description{
 Queries and returns the number of accuracy columns.
+}
+\examples{
+nItem(phd[[1]]$EA)
 }
 

@@ -7,7 +7,7 @@
 getCol(x, i)
 }
 \arguments{
-\item{x}{Data frame to get columns indexes from.}
+\item{x}{Data frame from phd sample.}
 
 \item{i}{Character indicating information type to get. 'a' = accuracy, 'c' =
 confidence, 'd' = decision, 't' = time.}
@@ -18,5 +18,8 @@ Vector of column names.
 \description{
 Get item-level column names for answer accuracy (a), confidence (c), decision (d)
 or time (t) from data frame.
+}
+\examples{
+getCol(phd[[1]]$EA, 'a')
 }
 
