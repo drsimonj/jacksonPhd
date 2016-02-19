@@ -9,7 +9,8 @@ computePost(x)
 \arguments{
 \item{x}{Data frame from phd sample.}
 
-\item{na.rm}{logical. Should missing values (including NaN) be omitted from the calculations? Default = True}
+\item{na.rm}{logical. Should missing values (including NaN) be omitted from
+the calculations? Default = True}
 }
 \value{
 POST vector. Any values < 0 or > 100 scored as NA.

@@ -2,8 +2,8 @@
 #'
 #' Compute the mean of all 'a' columns (scored 1 for correct and 0 for
 #' incorrect) for each participant (row) and multiply by 100.
+#' To be called with compute().
 #'
-#' @export
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
 #' @return Accuracy vector.
@@ -17,8 +17,8 @@ computeAccuracy <- function(x, na.rm = TRUE) {
 #'
 #' Compute the mean of all 'c' columns (scored 1 for correct and 0 for
 #' incorrect) for each participant (row).
+#' To be called with compute().
 #'
-#' @export
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
 #' @return Confidence vector.
@@ -28,32 +28,24 @@ computeConfidence <- function(x, na.rm = TRUE) {
   rowMeans(x[, getCol(x, "c")], na.rm)
 }
 
-#' Compute the POST (Point Of Sufficient cerTainty) for each participant in Jackson Phd test data frame.
+#' Compute bias (over/underconfidence) for each participant.
 #'
-#' @export
+#' Compute the bias score for each participant in the data frame.
+#' To be called with compute().
+#'
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
-#' @return POST vector. Any values < 0 or > 100 scored as NA.
+#' @return Bias vector.
 #' @examples
-#' computePost(phd[[1]]$EA)
-computePost <- function(x) {
-  dcs <- getCol(x, "d")
-  crs <- getCol(x, "c")
-
-  posts <- apply(x, 1, function(i) {
-    fit  <- glm(i[dcs] ~ i[crs], family = binomial())
-    -coef(fit)[[1]] / coef(fit)[[2]]
-  })
-
-  posts[is.na(posts) | posts < 0 | posts > 100] <- NA
-
-  posts
+#' computeBias(phd[[1]]$EA)
+computeBias <- function(x, na.rm = TRUE) {
+  computeConfidence(x, na.rm) - computeAccuracy(x, na.rm)
 }
 
 #' Compute discrimination (confidence for correct answers - confidence for
 #' incorrect answers) for each participant in Jackson Phd test data frame.
+#' To be called with compute().
 #'
-#' @export
 #' @param x Data frame from phd sample.
 #' @param na.rm logical. Should missing values (including NaN) be omitted from the calculations? Default = True
 #' @return Discrimination vector.
@@ -74,4 +66,59 @@ computeDiscrimination <- function(x, na.rm = TRUE) {
     })
   })
   tmp[, 1] - tmp[, 2]
+}
+
+#' Compute the POST (Point Of Sufficient cerTainty) for each participant.
+#'
+#' To be called with compute().
+#'
+#' @param x Data frame from phd sample.
+#' @param na.rm logical. Should missing values (including NaN) be omitted from
+#'   the calculations? Default = True
+#' @return POST vector. Any values < 0 or > 100 scored as NA.
+#' @examples
+#' computePost(phd[[1]]$EA)
+computePost <- function(x) {
+  dcs <- getCol(x, "d")
+  crs <- getCol(x, "c")
+
+  posts <- apply(x, 1, function(i) {
+    fit  <- glm(i[dcs] ~ i[crs], family = binomial())
+    -coef(fit)[[1]] / coef(fit)[[2]]
+  })
+
+  posts[is.na(posts) | posts < 0 | posts > 100] <- NA
+
+  posts
+}
+
+#' Compute a set of variables for each participant.
+#'
+#' Computes a set of variables for each participant in a Jackson PhD data frame.
+#'
+#' @export
+#' @param x Data frame from phd sample.
+#' @param vars Character vector of variables to be computed. Default/Allowed =
+#'   c("accuracy", "confidence", "bias", "discrimination", "post")
+#' @param bind logical. Should variable results be bound to original data frame x? Default = TRUE.
+#' @param na.rm logical. Should missing values (including NaN) be omitted from
+#'   the calculations? Default = True
+compute <- function(x, vars = c("accuracy", "confidence", "bias", "discrimination", "post"),
+                    bind = TRUE, na.rm = TRUE) {
+
+  # Calculate variables
+  results <- sapply(vars, function(var) {
+    switch(var,
+           accuracy = computeAccuracy(x, na.rm),
+           confidence = computeConfidence(x, na.rm),
+           bias = computeBias(x, na.rm),
+           discrimination = computeDiscrimination(x, na.rm),
+           post = computePost(x))
+  })
+
+  # Return results
+  if (bind) {
+    return (cbind(x, results))
+  }
+  return (results)
 }
