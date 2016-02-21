@@ -6,10 +6,13 @@
 incorrect answers) for each participant in Jackson Phd test data frame.
 To be called with compute().}
 \usage{
-computeDiscrimination(x, na.rm = TRUE)
+computeDiscrimination(x, group = c(T), na.rm = TRUE)
 }
 \arguments{
 \item{x}{Data frame from phd sample.}
+
+\item{group}{Logical vector used to return a group of the candidate results.
+See ?getCol for details.}
 
 \item{na.rm}{logical. Should missing values (including NaN) be omitted from the calculations? Default = True}
 }

@@ -5,13 +5,18 @@
 \title{Compute a set of variables for each participant.}
 \usage{
 compute(x, vars = c("accuracy", "confidence", "bias", "discrimination",
-  "post"), bind = TRUE, na.rm = TRUE)
+  "post"), group = c(T), suffix = "", bind = TRUE, na.rm = TRUE)
 }
 \arguments{
 \item{x}{Data frame from phd sample.}
 
 \item{vars}{Character vector of variables to be computed. Default/Allowed =
 c("accuracy", "confidence", "bias", "discrimination", "post")}
+
+\item{group}{Logical vector used to return a group of the candidate results.
+See ?getCol for details.}
+
+\item{suffix}{String. Will be added to column names.}
 
 \item{bind}{logical. Should variable results be bound to original data frame x? Default = TRUE.}
 

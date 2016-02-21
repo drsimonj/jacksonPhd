@@ -4,13 +4,16 @@
 \alias{getCol}
 \title{Get item-level column names from Jackson Phd test data frame.}
 \usage{
-getCol(x, i)
+getCol(x, i, group = c(T))
 }
 \arguments{
 \item{x}{Data frame from phd sample.}
 
 \item{i}{Character indicating information type to get. 'a' = accuracy, 'c' =
 confidence, 'd' = decision, 't' = time.}
+
+\item{group}{Logical vector used to return a group of the candidate results.
+Default = c(TRUE) to return all results.}
 }
 \value{
 Vector of column names.
@@ -23,5 +26,6 @@ or time (t) from data frame with regex call.
 getCol(phd[[1]]$EA, 'a')
 getCol(phd[[1]]$EA, "a|c")
 getCol(phd[[1]]$EA, "[ac]")
+getCol(phd[[1]]$EA, 'a', c(T, F))  # return off columns
 }
 

@@ -7,13 +7,16 @@
 #' @param x Data frame from phd sample.
 #' @param i Character indicating information type to get. 'a' = accuracy, 'c' =
 #'   confidence, 'd' = decision, 't' = time.
+#' @param group Logical vector used to return a group of the candidate results.
+#'   Default = c(TRUE) to return all results.
 #' @return Vector of column names.
 #' @examples
 #' getCol(phd[[1]]$EA, 'a')
 #' getCol(phd[[1]]$EA, "a|c")
 #' getCol(phd[[1]]$EA, "[ac]")
-getCol <- function(x, i) {
-  grep(paste0(i, "[0-9]"), names(x), value = T)
+#' getCol(phd[[1]]$EA, 'a', c(T, F))  # return off columns
+getCol <- function(x, i, group = c(T)) {
+  grep(paste0(i, "[0-9]"), names(x), value = T)[group]
 }
 
 #' Return the number of test items for a given Jackson Phd test data frame.

@@ -4,13 +4,13 @@
 \alias{computePost}
 \title{Compute the POST (Point Of Sufficient cerTainty) for each participant.}
 \usage{
-computePost(x)
+computePost(x, group = c(T))
 }
 \arguments{
 \item{x}{Data frame from phd sample.}
 
-\item{na.rm}{logical. Should missing values (including NaN) be omitted from
-the calculations? Default = True}
+\item{group}{Logical vector used to return a group of the candidate results.
+See ?getCol for details.}
 }
 \value{
 POST vector. Any values < 0 or > 100 scored as NA.

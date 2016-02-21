@@ -4,10 +4,13 @@
 \alias{computeConfidence}
 \title{Compute mean confidence as a percentage for each participant in Jackson Phd test data frame.}
 \usage{
-computeConfidence(x, na.rm = TRUE)
+computeConfidence(x, group = c(T), na.rm = TRUE)
 }
 \arguments{
 \item{x}{Data frame from phd sample.}
+
+\item{group}{Logical vector used to return a group of the candidate results.
+See ?getCol for details.}
 
 \item{na.rm}{logical. Should missing values (including NaN) be omitted from the calculations? Default = True}
 }
