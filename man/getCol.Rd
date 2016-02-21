@@ -17,9 +17,11 @@ Vector of column names.
 }
 \description{
 Get item-level column names for answer accuracy (a), confidence (c), decision (d)
-or time (t) from data frame.
+or time (t) from data frame with regex call.
 }
 \examples{
 getCol(phd[[1]]$EA, 'a')
+getCol(phd[[1]]$EA, "a|c")
+getCol(phd[[1]]$EA, "[ac]")
 }
 

@@ -3,3 +3,4 @@
 export(compute)
 export(getCol)
 export(nItem)
+export(stretchPhd)
