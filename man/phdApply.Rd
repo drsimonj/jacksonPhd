@@ -18,4 +18,9 @@ phdApply(all, FUN, ...)
 This is a convenience function to apply a function (FUN) to all data frames
 within the phd data set (or copy of it).
 }
+\examples{
+x <- phdApply(phd, compute)
+sapply(x, names)
+head(x[[1]]$EA)
+}
 

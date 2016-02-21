@@ -5,7 +5,9 @@ Version: 0.0.0.9002
 Date: 2016-02-19
 Authors@R: person("Simon A", "Jackson", email = "simon.jackson@sydney.edu.au", role = c("aut", "cre"))
 Description: Contains item-level data and some computed variables for
-    all four samples collected by Simon A Jackson for his PhD.
+    all four samples collected by Simon A Jackson for his PhD:
+    "Individual differences in decision making: the role of
+    cognitive abilities, monitoring and control."
     All samples consist of undergraduate psychology students from the
     University of Sydney. Samples 1, 2 and 4 and first-year students.
     Sample 3 consists of third-year students.
