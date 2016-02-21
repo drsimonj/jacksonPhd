@@ -29,6 +29,16 @@ nItem <- function(x) {
   length(getCol(x, 'a'))
 }
 
+#' Check if all elements of a numeric vector fall within a tolerable range.
+#'
+#' @param x Numeric vector.
+#' @param tol Tolerable range. Default = 0 to check if all elements are equal.
+#' @param na.rm a logical value indicating whether NA values should be stripped
+#'   before the computation proceeds. Default = FALSE
+allWithin <- function(x, tol = 0, na.rm = FALSE) {
+  abs(max(x, na.rm = na.rm) - min(x, na.rm = na.rm)) < tol
+}
+
 #' Convert data frame from phd sample to long format.
 #'
 #' @export
@@ -70,4 +80,37 @@ stretchPhd <- function(x, demo = NULL) {
 
   # Return
   return (stretched)
+}
+
+#' Apply a function to all data frames (except demographics) in the phd data set
+#' (or copy of it).
+#'
+#' This is a convenience function to apply a function (FUN) to all data frames
+#' within the phd data set (or copy of it).
+#'
+#' @export
+#' @param all Data set on which to apply function. Either phd or copy of it.
+#' @param FUN the function to be applied
+#' @param ... optional arguments to FUN.
+#' @examples
+#' x <- phdApply(phd, compute)
+#' sapply(x, names)
+#' head(x[[1]]$EA)
+phdApply <- function (all, FUN, ...) {
+  lapply(all, function(sample) {
+
+    # Get tests without demographics
+    tests <- names(sample)
+    tests <- tests[tests != "demo"]
+
+    # Apply function to tests
+    applied <- lapply(tests, function(test) {
+      FUN(sample[[test]], ...)
+    })
+    names(applied) <- tests
+
+    # Append demographics back on
+    c(applied, sample["demo"])
+  })
+  #lapply(all, lapply, FUN, ...)
 }

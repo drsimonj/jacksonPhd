@@ -15,4 +15,12 @@ demographics will be added.}
 \description{
 Convert data frame from phd sample to long format.
 }
+\examples{
+x <- phd[[1]]$EA
+head(stretchPhd(x))
+x <- compute(x)
+head(stretchPhd(x))
+d <- phd[[1]]$demo
+head(stretchPhd(x, d))
+}
 

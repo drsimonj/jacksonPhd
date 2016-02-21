@@ -82,11 +82,18 @@ computePost <- function(x) {
   dcs <- getCol(x, "d")
   crs <- getCol(x, "c")
 
+  # Fit logistic regression model
   posts <- apply(x, 1, function(i) {
+    # Return NA if all decisions or confidence ratings are the same
+    if (allWithin(i[dcs], na.rm = TRUE) | allWithin(i[crs], na.rm = TRUE)) {
+      return (NA)
+    }
+
     fit  <- glm(i[dcs] ~ i[crs], family = binomial())
     -coef(fit)[[1]] / coef(fit)[[2]]
   })
 
+  # Set any POST to NA if it's outside acceptable range (0, 100)
   posts[is.na(posts) | posts < 0 | posts > 100] <- NA
 
   posts
