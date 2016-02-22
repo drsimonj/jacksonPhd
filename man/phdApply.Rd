@@ -25,5 +25,10 @@ within the phd data set (or copy of it).
 x <- phdApply(phd, compute)
 sapply(x, names)
 head(x[[1]]$EA)
+
+x <- phdApply(phd, compute, "accuracy")
+x <- appendDemo(x, phd)  # append demographics back on
+lapply(x, names)
+head(x[[1]]$EA)
 }
 

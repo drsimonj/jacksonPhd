@@ -5,7 +5,8 @@
 \title{Compute a set of variables for each participant.}
 \usage{
 compute(x, vars = c("accuracy", "confidence", "bias", "discrimination",
-  "post"), group = c(T), suffix = "", bind = TRUE, na.rm = TRUE)
+  "post", "false.alarms"), group = c(T), suffix = "", bind = TRUE,
+  na.rm = TRUE)
 }
 \arguments{
 \item{x}{Data frame from phd sample.}

@@ -107,6 +107,35 @@ computePost <- function(x, group = c(T)) {
   posts
 }
 
+
+#' Compute percentage of decisions of a particular category.
+#'
+#' Compute the percentage of decisions in a given decision category. E.g., a = 1
+#' and d = 0 returns percentage of misses. To be called with compute()
+#'
+#' @param Data frame from phd sample.
+#' @param a 0 or 1 indicating whether accuracy should be 0 or 1.
+#' @param group Logical vector used to return a group of the candidate results.
+#'   See ?getCol for details.
+#' @examples
+#' x <- phdApply(phd, compute, "false.alarms")
+#' head(x[[1]]$EA)
+computeDecisionCat <- function(x, a, d, group = c(T)) {
+  acs <- getCol(x, "a", group)
+  dcs <- getCol(x, "d", group)
+
+  apply(x, 1, function(i) {
+
+    if (!any(i[acs] == a)) {
+      return (NA)
+    }
+
+    tmp <- mapply(function(i.a, i.d) i.a == a & i.d == d,
+                  i[acs], i[dcs])
+    mean(tmp) * 100
+  })
+}
+
 #' Compute a set of variables for each participant.
 #'
 #' Computes a set of variables for each participant in a Jackson PhD data frame.
@@ -125,7 +154,8 @@ computePost <- function(x, group = c(T)) {
 #' head(compute(phd[[1]]$EA))
 #' head(compute(phd[[1]]$EA, "accuracy"))
 #' head(compute(phd[[1]]$EA, "post", c(T, F), ".odd"))
-compute <- function(x, vars = c("accuracy", "confidence", "bias", "discrimination", "post"),
+compute <- function(x, vars = c("accuracy", "confidence", "bias", "discrimination", "post",
+                                "false.alarms"),
                     group = c(T), suffix = "", bind = TRUE, na.rm = TRUE) {
 
   # Calculate variables
@@ -135,7 +165,11 @@ compute <- function(x, vars = c("accuracy", "confidence", "bias", "discriminatio
            confidence = computeConfidence(x, group, na.rm),
            bias = computeBias(x, group, na.rm),
            discrimination = computeDiscrimination(x, group, na.rm),
-           post = computePost(x, group))
+           post = computePost(x, group),
+           hits = computeDecisionCat(x, 1, 1, group),
+           misses = computeDecisionCat(x, 1, 0, group),
+           correct.rejections = computeDecisionCat(x, 0, 0, group),
+           false.alarms = computeDecisionCat(x, 0, 1, group))
   })
   colnames(results) <- paste0(colnames(results), suffix)
 
