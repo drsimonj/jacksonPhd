@@ -26,4 +26,9 @@ the calculations? Default = True}
 \description{
 Computes a set of variables for each participant in a Jackson PhD data frame.
 }
+\examples{
+head(compute(phd[[1]]$EA))
+head(compute(phd[[1]]$EA, "accuracy"))
+head(compute(phd[[1]]$EA, "post", c(T, F), ".odd"))
+}
 

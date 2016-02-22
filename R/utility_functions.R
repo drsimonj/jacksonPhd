@@ -42,6 +42,29 @@ allWithin <- function(x, tol = 0, na.rm = FALSE) {
   abs(max(x, na.rm = na.rm) - min(x, na.rm = na.rm)) < tol
 }
 
+#' Remove the 'demo' data frames from a phd data set.
+#'
+#' @export
+#' @param phd.dat Data set of phd data.
+removeDemo <- function(phd.dat) {
+  lapply(phd.dat, function(sample) {
+    demo <- names(sample) == "demo"
+    sample[!demo]
+  })
+}
+
+#' Append the 'demo' data frames from one phd data set onto another phd data
+#' set.
+#'
+#' @export
+#' @param phd.without Phd data set without the demo data frames.
+#' @param phd.with Phd data set with the demo data frames
+appendDemo <- function(phd.without, phd.with) {
+  lapply(1:length(phd.with), function(sample) {
+    c(phd.without[[sample]], phd.with[[sample]]["demo"])
+  })
+}
+
 #' Convert data frame from phd sample to long format.
 #'
 #' @export
@@ -85,35 +108,32 @@ stretchPhd <- function(x, demo = NULL) {
   return (stretched)
 }
 
-#' Apply a function to all data frames (except demographics) in the phd data set
+#' Apply a function to all data frames in a phd data set
 #' (or copy of it).
 #'
 #' This is a convenience function to apply a function (FUN) to all data frames
 #' within the phd data set (or copy of it).
 #'
 #' @export
-#' @param all Data set on which to apply function. Either phd or copy of it.
+#' @param phd.dat Data set on which to apply function. Either phd or copy of it.
 #' @param FUN the function to be applied
 #' @param ... optional arguments to FUN.
+#' @param demo.rm a logical value indicating whether the demographic data frames
+#'   should be removed before the analysis proceeds.
 #' @examples
 #' x <- phdApply(phd, compute)
 #' sapply(x, names)
 #' head(x[[1]]$EA)
-phdApply <- function (all, FUN, ...) {
-  lapply(all, function(sample) {
+#'
+#' x <- phdApply(phd, compute, "accuracy")
+#' x <- appendDemo(x, phd)  # append demographics back on
+#' lapply(x, names)
+#' head(x[[1]]$EA)
+phdApply <- function (phd.dat, FUN, ..., demo.rm = TRUE) {
 
-    # Get tests without demographics
-    tests <- names(sample)
-    tests <- tests[tests != "demo"]
+  if (demo.rm) {
+    phd.dat <- removeDemo(phd.dat)
+  }
 
-    # Apply function to tests
-    applied <- lapply(tests, function(test) {
-      FUN(sample[[test]], ...)
-    })
-    names(applied) <- tests
-
-    # Append demographics back on
-    c(applied, sample["demo"])
-  })
-  #lapply(all, lapply, FUN, ...)
+  lapply(phd.dat, lapply, FUN, ...)
 }

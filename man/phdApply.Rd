@@ -2,17 +2,20 @@
 % Please edit documentation in R/utility_functions.R
 \name{phdApply}
 \alias{phdApply}
-\title{Apply a function to all data frames (except demographics) in the phd data set
+\title{Apply a function to all data frames in a phd data set
 (or copy of it).}
 \usage{
-phdApply(all, FUN, ...)
+phdApply(phd.dat, FUN, ..., demo.rm = TRUE)
 }
 \arguments{
-\item{all}{Data set on which to apply function. Either phd or copy of it.}
+\item{phd.dat}{Data set on which to apply function. Either phd or copy of it.}
 
 \item{FUN}{the function to be applied}
 
 \item{...}{optional arguments to FUN.}
+
+\item{demo.rm}{a logical value indicating whether the demographic data frames
+should be removed before the analysis proceeds.}
 }
 \description{
 This is a convenience function to apply a function (FUN) to all data frames
