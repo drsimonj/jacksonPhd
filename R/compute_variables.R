@@ -155,7 +155,7 @@ computeDecisionCat <- function(x, a, d, group = c(T)) {
 #' head(compute(phd[[1]]$EA, "accuracy"))
 #' head(compute(phd[[1]]$EA, "post", c(T, F), ".odd"))
 compute <- function(x, vars = c("accuracy", "confidence", "bias", "discrimination", "post",
-                                "false.alarms"),
+                                "hits", "misses", "correct.rejections", "false.alarms"),
                     group = c(T), suffix = "", bind = TRUE, na.rm = TRUE) {
 
   # Calculate variables
